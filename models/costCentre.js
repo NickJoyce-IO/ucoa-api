@@ -2,7 +2,8 @@ const { sequelize } = require('../config/config')
 const Sequelize = require('sequelize')
 
 const CostCentre = sequelize.define('CostCentre', {
-   userName: { type: Sequelize.STRING, primaryKey: true},
+   id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+   userName: { type: Sequelize.STRING },
    email: Sequelize.STRING, 
    telNumber: Sequelize.STRING,
    directorate: Sequelize.STRING,
@@ -19,7 +20,11 @@ const CostCentre = sequelize.define('CostCentre', {
    mentorMap: Sequelize.STRING,
    dffType: Sequelize.STRING,
    enable: Sequelize.STRING,
-   costCentreEntity: Sequelize.STRING
+   costCentreEntity: Sequelize.STRING,
+   maApprove: Sequelize.STRING,
+   maApproveBy: Sequelize.STRING,
+   maApproveDate: Sequelize.STRING,
+
 
 }, {  tableName: 'CostCentre',
          timestamps: true,

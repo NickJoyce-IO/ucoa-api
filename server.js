@@ -40,12 +40,19 @@ app.post('/costcentre', (req, res) => {
 
 // GET route to retrieve all requests in Cost Centre Table
 app.get('/costcentre', (req, res) => {
-    const data = CostCentre.findAll().then((results) => {
+    CostCentre.findAll().then((results) => {
         res.send(results)
     })
 
 })
 
+//GET route for single record in Cost Centre Table
+app.get('/costcentre/:id', (req, res) => {
+    const id = req.params.id
+   CostCentre.findById(id).then((result) => {
+       res.send(result)
+   })
+})
 
 app.listen(port, () => {
     console.log(`Started on Port ${port}`)
