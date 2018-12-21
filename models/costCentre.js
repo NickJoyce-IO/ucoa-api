@@ -24,6 +24,8 @@ const CostCentre = sequelize.define('CostCentre', {
    maApprove: Sequelize.STRING,
    maApproveBy: Sequelize.STRING,
    maApproveDate: Sequelize.STRING,
+   uuid: {type: Sequelize.UUIDV4,
+      defaultValue: Sequelize.UUIDV4 }
 
 
 }, {  tableName: 'CostCentre',

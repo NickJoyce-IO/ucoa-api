@@ -6,10 +6,19 @@ const { CostCentre } = require('./models/costCentre')
 const app = express()
 const port = process.env.PORT || 3000
 
+
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+    next()
+})
+
 app.use(bodyParser.json())
 
 // POST route to write a new line to the Cost Centre database
-app.post('/costcentre', (req, res) => {
+app.post('/costcentre', (req, res, next) => {
+    console.log(req.body)
     const costCentre = new CostCentre({
         userName: req.body.userName,
         email: req.body.email,
@@ -47,9 +56,9 @@ app.get('/costcentre', (req, res) => {
 })
 
 //GET route for single record in Cost Centre Table
-app.get('/costcentre/:id', (req, res) => {
-    const id = req.params.id
-   CostCentre.findById(id).then((result) => {
+app.get('/costcentre/:uuid', (req, res) => {
+    const uuid = req.params.uuid
+   CostCentre.findAll({where: {uuid}}).then((result) => {
        res.send(result)
    })
 })
