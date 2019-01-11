@@ -25,7 +25,8 @@ const CostCentre = sequelize.define('CostCentre', {
    maApproveBy: Sequelize.STRING,
    maApproveDate: Sequelize.STRING,
    uuid: {type: Sequelize.UUIDV4,
-      defaultValue: Sequelize.UUIDV4 }
+      defaultValue: Sequelize.UUIDV4 },
+   batchUuid: {type: Sequelize.UUIDV4}
 
 
 }, {  tableName: 'CostCentre',

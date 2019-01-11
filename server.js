@@ -6,8 +6,6 @@ const { CostCentre } = require('./models/costCentre')
 const app = express()
 const port = process.env.PORT || 3000
 
-
-
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
@@ -45,6 +43,57 @@ app.post('/costcentre', (req, res, next) => {
     }), (e) => {
         res.status(400).send(e)
     }
+})
+
+// POST route for /costcentre/bulk - this bulk uploads data from a CSV fie
+app.post('/costcentre/bulkupload', (req, res) => {
+    CostCentre.bulkCreate([{
+        userName: 'Bulk Uploader',
+        email: 'Bulk Email',
+        telNumber: 'Bulk telephone',
+        directorate: 'Bulk directorate',
+        businessRequirement: 'Bulk business Requirement',
+        priority: 'Bulk priority',
+        priorityJustification: 'Bulk justification',
+        changeType: 'Bulk ChangeType',
+        level: 'Bulk level',
+        code: 'Bulk Code',
+        description: 'Bulk Description',
+        parentLevel: 'Bulk Parent Level',
+        parentCode: 'Bulk Parent Code',
+        parentDescription: 'Bulk Parent Description',
+        mentorMap: 'Bulk Mentor Map',
+        dffType: 'Bulk DFF Type',
+        enable: 'Bulk Enable',
+        costCentreEntity: 'Bulk CC Entity',
+        batchUuid: '0e2c230d-211b-4ca5-a872-0d98c7315dfd'
+    },
+    {
+        userName: 'Bulk Uploader2',
+        email: 'Bulk Email',
+        telNumber: 'Bulk telephone',
+        directorate: 'Bulk directorate',
+        businessRequirement: 'Bulk business Requirement',
+        priority: 'Bulk priority',
+        priorityJustification: 'Bulk justification',
+        changeType: 'Bulk ChangeType',
+        level: 'Bulk level',
+        code: 'Bulk Code',
+        description: 'Bulk Description',
+        parentLevel: 'Bulk Parent Level',
+        parentCode: 'Bulk Parent Code',
+        parentDescription: 'Bulk Parent Description',
+        mentorMap: 'Bulk Mentor Map',
+        dffType: 'Bulk DFF Type',
+        enable: 'Bulk Enable',
+        costCentreEntity: 'Bulk CC Entity',
+        batchUuid: '0e2c230d-211b-4ca5-a872-0d98c7315dfd'
+    }]).then(() => {
+        const batchUuid = '0e2c230d-211b-4ca5-a872-0d98c7315dfd'
+        return CostCentre.findAll({where: {batchUuid}})
+    }).then((results) => {
+        res.send(results)
+    })
 })
 
 // GET route to retrieve all requests in Cost Centre Table
